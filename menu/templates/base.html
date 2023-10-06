@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Мой сайт</title>
+</head>
+<body>
+    <header></header>
+    <nav>
+        <h1>Добро пожаловать!</h1>    
+        {% for item in menu_items %}
+            <li><a href="{{ item.url }}">{{ item.title }}</a></li>
+            {% if item.children.all %}
+                <ul>
+                    {% for child in item.children.all %}
+                        <li><a href="{{ child.url }}">{{ child.title }}</a></li>
+                        <!-- Продолжайте рекурсивно обходить дочерние элементы, если они есть -->
+                    {% endfor %}
+                </ul>
+            {% endif %}
+        {% endfor %}
+    </nav>    
+    <main>
+        {% block content %}{% endblock %}
+    </main>
+    <footer></footer>
+</body>
+</html>
